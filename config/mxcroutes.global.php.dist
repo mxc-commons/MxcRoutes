@@ -2,61 +2,64 @@
 $mxcChildRouteModels = array(
     'child_route_models' => array(
        	'default' => array(
-       	   'create' => array(
-        	   'type' => 'Literal',
-                'options' => array(
-            	   'route' => '/c',
-                    'defaults' => array(
-                        'action' => 'create',
+       	   'may_terminate' => true,
+       	   'child_routes' => array(
+           	   'create' => array(
+            	   'type' => 'Literal',
+                    'options' => array(
+                	   'route' => '/c',
+                        'defaults' => array(
+                            'action' => 'create',
+                        ),
+                    ),
+                ),
+                'list' => array(
+            	   'type' => 'Literal',
+                    'options' => array(
+                	   'route' => '/l',
+                        'defaults' => array(
+                            'action' => 'list',
+                        ),
+                    ),
+                ),
+                'edit' => array(
+            	   'type' => 'Segment',
+                    'options' => array(
+                	   'route' => '/:id/e',
+                        'constraints' => array(
+                            'id' => '[0-9]*',
+                        ),
+                        'defaults' => array(
+                            'action' => 'edit',
+                        ),
+                    ),
+                ),
+                'show' => array(
+            	   'type' => 'Segment',
+                    'options' => array(
+                	   'route' => '/:id/s',
+                        'constraints' => array(
+                            'id' => '[0-9]*',
+                        ),
+                        'defaults' => array(
+                            'action' => 'show',
+                        ),
+                    ),
+                ),
+                'delete' => array(
+            	   'type' => 'Segment',
+                   'options' => array(
+                	   'route' => '/:id/d',
+                        'constraints' => array(
+                            'id' => '[0-9]*',
+                        ),
+                        'defaults' => array(
+                           'action' => 'delete',
+                        ),
                     ),
                 ),
             ),
-            'list' => array(
-        	   'type' => 'Literal',
-                'options' => array(
-            	   'route' => '/l',
-                    'defaults' => array(
-                        'action' => 'list',
-                    ),
-                ),
-            ),
-            'edit' => array(
-        	   'type' => 'Segment',
-                'options' => array(
-            	   'route' => '/:id/e',
-                    'constraints' => array(
-                        'id' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        'action' => 'edit',
-                    ),
-                ),
-            ),
-            'show' => array(
-        	   'type' => 'Segment',
-                'options' => array(
-            	   'route' => '/:id/s',
-                    'constraints' => array(
-                        'id' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                        'action' => 'show',
-                    ),
-                ),
-            ),
-            'delete' => array(
-        	   'type' => 'Segment',
-               'options' => array(
-            	   'route' => '/:id/d',
-                    'constraints' => array(
-                        'id' => '[0-9]*',
-                    ),
-                    'defaults' => array(
-                       'action' => 'delete',
-                    ),
-                ),
-            ),
-        ),
+       	),
     ),
 );
 
