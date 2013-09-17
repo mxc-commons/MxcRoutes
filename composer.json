@@ -1,0 +1,32 @@
+{
+    "name": "mxc-commons/mxc-routes",
+    "description": "Zend Framework 2 Module that provides a new route to generate child route structures automatically according to a template configuration you provide.",
+    "type": "library",
+    "keywords": [
+        "module",
+        "zf2"
+    ],
+    "license": "BSD-3-Clause",
+
+    "homepage": "http://www.github.com/mxc-commons/MxcRoutes/",
+    "authors": [
+        {
+            "name": "Frank Hein",
+            "email": "frank.hein@maxence.de",
+            "homepage": "http://www.maxence.de/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-mvc": ">=2.1",
+        "zendframework/zend-servicemanager": ">=2.1",
+        "zendframework/zend-eventmanager": ">=2.1",
+        "zendframework/zend-modulemanager": ">=2.1",
+        "zendframework/zend-stdlib": "~2.1",
+    },
+    "autoload": {
+        "psr-0": {
+            "MxcRoutes\\": "src/"
+        }
+    }
+}
