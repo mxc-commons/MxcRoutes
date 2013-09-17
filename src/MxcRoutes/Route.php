@@ -80,8 +80,6 @@ class Route extends Part implements ServiceLocatorAwareInterface {
         foreach ($this->childRoutes as $cr)
             $cr['options']['defaults']['controller'] = $this->controller;
         
-        var_dump($cr);
-        
         $this->routes = new PriorityList();
         $this->isInit = true;
     }
