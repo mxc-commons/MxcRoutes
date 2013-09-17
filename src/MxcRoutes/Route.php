@@ -31,9 +31,9 @@ class Route extends Part implements ServiceLocatorAwareInterface {
         $this->route = new Literal($options['route'], $options['defaults']);
         $this->controller = $options['defaults']['controller'];
         $this->childRouteModel = $options['defaults']['child_route_model'];
-        $this->mayTerminate = true;
         $this->childRoutes = null;
         $this->prototypes = null;
+        $this->mayTerminate = true;
     }
 
     /**
@@ -74,7 +74,9 @@ class Route extends Part implements ServiceLocatorAwareInterface {
         if (!isset($models[$this->childRouteModel])) {
             throw new Exception\InvalidArgumentException(sprintf('Invalid child_route_model specification (%s).',$this->childRouteModel));
         }
-        $this->childRoutes = $models[$this->childRouteModel];
+        $model = $models[$this->childRouteModel];
+        $this->mayTerminate = isset($model['may_terminate']) ? $model['may_terminate'] : true;
+        $this->childRoutes = isset($model['child_routes']) ? $model['child_routes'] : null; 
         
         //-- inject the base route's controller to each each child route
         foreach ($this->childRoutes as $cr)
