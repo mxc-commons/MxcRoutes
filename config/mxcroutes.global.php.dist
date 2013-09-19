@@ -60,6 +60,26 @@ $mxcChildRouteModels = array(
                 ),
             ),
        	),
+
+        'extended' => array(
+            'extends' => 'default',
+            'child_routes' => array(
+                'listby' => array(
+            	   'type' => 'Segment',
+                    'options' => array(
+                	   'route' => '/lb/:id',
+                        'constraints' => array(
+                            'id' => '[0-9]*',
+                        ),
+                        'defaults' => array(
+                            'action' => 'list',
+                            'findMethod' => 'findBy'
+                        ),
+                    ),
+                ),
+                
+            )
+        )
     ),
 );
 

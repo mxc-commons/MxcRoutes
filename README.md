@@ -1,6 +1,6 @@
 MxcRoutes
 ===============
-Version 1.0.0 created by Frank Hein and the mxc-commons team.
+Version 1.0.1 created by Frank Hein and the mxc-commons team.
 
 MxcRoutes is part of the [maxence openBeee initiative](http://www.maxence.de/mxcweb/index.php/themen/open-business/)
 by [maxence business consulting gmbh, Germany](http://www.maxence.de). 
@@ -27,11 +27,16 @@ template defintions. So module programmers can setup the complete child route sc
 a controller be defining a single route. 
 
 
-**1. 	Provide the capability to configure a controller routing scheme with a single route definition** 
+**1. 	Provide the capability to configure a controller routing models with a single route definition** 
   
 
-**2. Allow to select among several child route schemes by name**
+**2. Allow to select among several child route models by name**
 
+Set `'child_route_model' => 'myChildRouteModelName'` in the `defaults` section of the MxcRoute.
+
+**3. Allow to extend child route models by inheritence**
+
+Set `'extends' => 'myParentChildRouteName'` within the child route model definition.
 
 Installation
 ------------
@@ -85,7 +90,7 @@ The following option is available:
 - **`child_route_models`** - Array of child route models: `<modelName> => array(<child_route>, ...), ... )`, where `modelName`is an identifier of your choice and each 
 `child_route` is a ZF2 route definition. 
 
-See `mxcroutes.global.php.dist` for an example configuration.
+See `mxcroutes.global.php.dist` for an example configuration including model inheritance.
 
 Note: You can easily setup a child route scheme by copying and pasting an existing child route
 structure from your router configuration.

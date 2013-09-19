@@ -8,6 +8,7 @@ use Zend\Mvc\Router\Http\Literal;
 use Traversable;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Mvc\Router\PriorityList;
+use Zend\Stdlib\SplStack;
 
 /**
  * 
@@ -69,14 +70,28 @@ class Route extends Part implements ServiceLocatorAwareInterface {
             ->getServiceLocator()                        // service Manager
             ->get('MxcRoutes\RouteOptions');        
 
-        //-- get the child route definitions
-        $models = $childRouteModels->getChildRouteModels();
-        if (!isset($models[$this->childRouteModel])) {
-            throw new Exception\InvalidArgumentException(sprintf('Invalid child_route_model specification (%s).',$this->childRouteModel));
-        }
-        $model = $models[$this->childRouteModel];
-        $this->mayTerminate = isset($model['may_terminate']) ? $model['may_terminate'] : true;
-        $this->childRoutes = isset($model['child_routes']) ? $model['child_routes'] : null; 
+        $rms = new SplStack;
+        $current = $this->childRouteModel;
+
+        do {
+            //-- get the child route definitions
+            $models = $childRouteModels->getChildRouteModels();
+            if (!isset($models[$current])) {
+                throw new Exception\InvalidArgumentException(sprintf('Invalid child_route_model specification (%s).',$this->childRouteModel));
+            }
+            $model = $models[$current];
+            $rms->push($model);
+            $current = isset($model['extends']) ? $model['extends'] : null;
+        } while ($current);
+
+        $this->childRoutes = array();
+
+        do {
+            $model = $rms->pop();
+            $cr = isset($model['child_routes']) ? $model['child_routes'] : array();
+            $this->childRoutes = array_merge($this->childRoutes, $cr);
+            $this->mayTerminate = isset($model['may_terminate']) ? $model['may_terminate'] : true;
+        } while(!$rms->isEmpty());
         
         //-- inject the base route's controller to each each child route
         foreach ($this->childRoutes as $cr)
