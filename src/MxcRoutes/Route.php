@@ -31,7 +31,7 @@ class Route extends Part implements ServiceLocatorAwareInterface {
     {
         $this->route = new Literal($options['route'], $options['defaults']);
         $this->controller = $options['defaults']['controller'];
-        $this->childRouteModel = $options['defaults']['child_route_model'];
+        $this->childRouteModel = isset($options['defaults']['child_route_model']) ? $options['defaults']['child_route_model'] : 'default';
         $this->childRoutes = null;
         $this->prototypes = null;
         $this->mayTerminate = true;
@@ -54,9 +54,7 @@ class Route extends Part implements ServiceLocatorAwareInterface {
         if (!isset($options['defaults']['action'])) {
             throw new Exception\InvalidArgumentException('Missing "action" in defaults array.');
         }
-        if(!isset($options['defaults']['child_route_model']))
-            $options['defaults']['child_route_model'] = 'default';
-        
+       
         return new Route($options);
     }
 
