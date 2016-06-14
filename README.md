@@ -2,8 +2,7 @@ MxcRoutes
 ===============
 Version 1.0.1 created by Frank Hein and the mxc-commons team.
 
-MxcRoutes is part of the [maxence openBeee initiative](http://www.maxence.de/mxcweb/index.php/themen/open-business/)
-by [maxence business consulting gmbh, Germany](http://www.maxence.de). 
+MxcRoutes is part of the maxence Open Source Initiative by [maxence business consulting gmbh, Germany](http://www.maxence.de). 
 
 Introduction
 ------------
